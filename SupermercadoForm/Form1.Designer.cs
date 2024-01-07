@@ -153,6 +153,7 @@
             richTextBoxHistorico.Size = new Size(262, 111);
             richTextBoxHistorico.TabIndex = 12;
             richTextBoxHistorico.Text = "";
+            richTextBoxHistorico.TextChanged += richTextBoxHistorico_TextChanged;
             // 
             // buttonCalcular
             // 

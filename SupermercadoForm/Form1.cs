@@ -79,9 +79,9 @@ namespace SupermercadoForm
             int numero1 = 0;
             try
             {
-            numero1 = Convert.ToInt32(textBoxNumeroNum01.Text);
+                numero1 = Convert.ToInt32(textBoxNumeroNum01.Text);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show("Número 1 dev e ser uma numeor inteiro");
                 textBoxNumeroNum01.Focus();
@@ -159,5 +159,9 @@ namespace SupermercadoForm
             richTextBoxHistorico.Clear();
         }
 
+        private void richTextBoxHistorico_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
