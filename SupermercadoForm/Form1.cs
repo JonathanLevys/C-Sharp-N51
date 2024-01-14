@@ -5,100 +5,86 @@ namespace SupermercadoForm
         public Form1()
         {
             InitializeComponent();
-            //Ao abrir a tela irá deixar preeenchido por padrão a operação somar
-            comboBoxOperação.SelectedItem = "Somar";
+
+            // Ao abrir a tela irá deixar preenchido por padrão a operação Somar
+            comboBoxOperacao.SelectedItem = "Somar";
         }
 
         private void buttonConcatenar_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show("Olá mundo!");
-            //Obter o nome que está preenchido no textbox do nome
+            // Obter o nome que está preenchido no TextBox do nome
             string nome = textBoxNome.Text;
-
+            // Validar que nome contém de 2 até 15 caracteres
             if (nome.Length > 15)
             {
-                MessageBox.Show("Nome deve conter no maximo 15 caracteres");
-                //encerra a execução deste metodo
+                MessageBox.Show("Nome deve conter no máximo 15 caracteres");
+                // Encerrar a execução deste método
                 return;
             }
             if (nome.Length < 2)
             {
-                MessageBox.Show("Nome deve conter no minimo 2 caracteres");
+                MessageBox.Show("Nome deve conter no mínimo 2 caracteres");
                 return;
             }
 
-            //Obter o sobrenome que está preenchido no textbox do sobrenome
+            // Obter o sobrenome que está preenchido no TextBox do sobrenome
             string sobrenome = textBoxSobrenome.Text;
-            //Validar que o nome contem de 5 ate 150 caracteres
+            // Validar que nome contém de 5 até 150 caracteres
             if (sobrenome.Length > 150)
             {
-                MessageBox.Show("Nome deve conter no maximo 15 caracteres");
-                //encerra a execução deste metodo
+                MessageBox.Show("Sobrenome deve conter no máximo 150 caracteres");
+                // Encerrar a execução deste método
                 return;
             }
             if (sobrenome.Length < 2)
             {
-                MessageBox.Show("Nome deve conter no minimo 2 caracteres");
+                MessageBox.Show("Sobrenome deve conter no mínimo 2 caracteres");
                 return;
             }
 
             // Concatenar o nome e sobrenome
             string nomeCompleto = nome + " " + sobrenome;
-            //Apresentar o nome completo do usuário
+            // Apresentar o nome completo do usuário
             MessageBox.Show(nomeCompleto);
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void buttonCalcular_Click(object sender, EventArgs e)
         {
-            string operacaoEscolhida = comboBoxOperação.SelectedItem.ToString();
+
+            //if (comboBoxOperacao.SelectedIndex == -1)
+            //{
+            //    MessageBox.Show("Selecione uma operação antes de calcular");
+            //    return;
+            //}
+
+            // Para obter o item escolhido do combo box utilizamos SelectedItem
+            string operacaoEscolhida = comboBoxOperacao.SelectedItem.ToString();
             int numero1 = 0;
             try
             {
-                numero1 = Convert.ToInt32(textBoxNumeroNum01.Text);
+                // Obter o número 1 preenchido no campo TextBox
+                numero1 = Convert.ToInt32(textBoxNumero1.Text);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Número 1 dev e ser uma numeor inteiro");
-                textBoxNumeroNum01.Focus();
+                MessageBox.Show("Número 1 deve ser um número inteiro");
+                textBoxNumero1.Focus();
                 return;
             }
+
             int numero2 = 0;
             try
             {
-                numero2 = Convert.ToInt32(textBoxNum02.Text);
+                // Obter o número 2 preenchido no campo TextBox
+                numero2 = Convert.ToInt32(textBoxNumero2.Text);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Número 2 dev e ser uma numeor inteiro");
-                textBoxNum02.Focus();
+                MessageBox.Show("Número 2 deve ser um número inteiro");
+                textBoxNumero2.Focus();
                 return;
-
             }
+
             int resultado = 0;
             char operacaoSimbolo = ' ';
             if (operacaoEscolhida == "Somar")
@@ -124,22 +110,19 @@ namespace SupermercadoForm
                 if (numero2 == 0)
                 {
                     MessageBox.Show("Número 2 não pode ser 0");
-                    textBoxNum02.Focus();
+                    textBoxNumero2.Focus();
                     return;
                 }
             }
 
-
-
             DateTime dataHoraAtual = DateTime.Now;
-            string dataHoraForamatada = dataHoraAtual.ToShortDateString() + " " +
-                dataHoraAtual.ToLongTimeString();
-            string texto = dataHoraForamatada + " " + numero1 + " " + operacaoSimbolo + " " + numero2 + " = " + resultado + "\n";
-
+            string dataHoraFormatada = dataHoraAtual.ToShortDateString() + " " + dataHoraAtual.ToLongTimeString();
+            string texto = dataHoraFormatada + " " + numero1 + " " + operacaoSimbolo + " " + numero2 + " = " + resultado + "\n";
+            // Concantenando o histórico com a nova operação realizada
+            //richTextBoxHistorico.Text = richTextBoxHistorico.Text + texto;
             richTextBoxHistorico.Text += texto;
 
             LimparCampos();
-
         }
 
         private void buttonLimpar_Click(object sender, EventArgs e)
@@ -151,17 +134,12 @@ namespace SupermercadoForm
 
         private void LimparCampos()
         {
-            textBoxNumeroNum01.Clear();
-            textBoxNum02.Clear();
-            comboBoxOperação.SelectedItem = "Somar";
-            textBoxNumeroNum01.Focus();
-
-            richTextBoxHistorico.Clear();
-        }
-
-        private void richTextBoxHistorico_TextChanged(object sender, EventArgs e)
-        {
-
+            // Limpar campos
+            //textBoxNumero1.Text = "";
+            textBoxNumero1.Clear();
+            textBoxNumero2.Clear();
+            comboBoxOperacao.SelectedItem = "Somar";
+            textBoxNumero1.Focus();
         }
     }
 }

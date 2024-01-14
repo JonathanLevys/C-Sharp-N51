@@ -34,35 +34,36 @@
             labelSobrenome = new Label();
             textBoxNome = new TextBox();
             textBoxSobrenome = new TextBox();
-            labelOperação = new Label();
+            labelOperacao = new Label();
+            comboBoxOperacao = new ComboBox();
             labelNumero1 = new Label();
-            textBoxNumeroNum01 = new TextBox();
+            textBoxNumero1 = new TextBox();
             labelNumero2 = new Label();
-            label7 = new Label();
+            textBoxNumero2 = new TextBox();
+            labelHistorico = new Label();
             richTextBoxHistorico = new RichTextBox();
             buttonCalcular = new Button();
-            textBoxNum02 = new TextBox();
-            comboBoxOperação = new ComboBox();
             buttonLimpar = new Button();
             SuspendLayout();
             // 
             // labelPrimeiraTela
             // 
             labelPrimeiraTela.AutoSize = true;
-            labelPrimeiraTela.Font = new Font("Baskerville Old Face", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            labelPrimeiraTela.Font = new Font("Microsoft Sans Serif", 15.9999981F, FontStyle.Bold, GraphicsUnit.Point);
             labelPrimeiraTela.ForeColor = Color.Red;
-            labelPrimeiraTela.Location = new Point(70, 9);
+            labelPrimeiraTela.Location = new Point(20, 8);
+            labelPrimeiraTela.Margin = new Padding(2, 0, 2, 0);
             labelPrimeiraTela.Name = "labelPrimeiraTela";
-            labelPrimeiraTela.Size = new Size(143, 27);
+            labelPrimeiraTela.Size = new Size(154, 26);
             labelPrimeiraTela.TabIndex = 0;
             labelPrimeiraTela.Text = "Primeira Tela";
-            labelPrimeiraTela.Click += label1_Click;
             // 
             // buttonConcatenar
             // 
-            buttonConcatenar.Location = new Point(70, 190);
+            buttonConcatenar.Location = new Point(20, 131);
+            buttonConcatenar.Margin = new Padding(2);
             buttonConcatenar.Name = "buttonConcatenar";
-            buttonConcatenar.Size = new Size(434, 129);
+            buttonConcatenar.Size = new Size(314, 126);
             buttonConcatenar.TabIndex = 1;
             buttonConcatenar.Text = "Concatenar";
             buttonConcatenar.UseVisualStyleBackColor = true;
@@ -71,17 +72,18 @@
             // labelNome
             // 
             labelNome.AutoSize = true;
-            labelNome.Location = new Point(70, 71);
+            labelNome.Location = new Point(20, 32);
+            labelNome.Margin = new Padding(2, 0, 2, 0);
             labelNome.Name = "labelNome";
             labelNome.Size = new Size(40, 15);
             labelNome.TabIndex = 2;
             labelNome.Text = "Nome";
-            labelNome.Click += label2_Click;
             // 
             // labelSobrenome
             // 
             labelSobrenome.AutoSize = true;
-            labelSobrenome.Location = new Point(70, 126);
+            labelSobrenome.Location = new Point(20, 85);
+            labelSobrenome.Margin = new Padding(2, 0, 2, 0);
             labelSobrenome.Name = "labelSobrenome";
             labelSobrenome.Size = new Size(68, 15);
             labelSobrenome.TabIndex = 3;
@@ -89,104 +91,113 @@
             // 
             // textBoxNome
             // 
-            textBoxNome.Location = new Point(70, 89);
+            textBoxNome.Location = new Point(20, 49);
+            textBoxNome.Margin = new Padding(2);
             textBoxNome.Name = "textBoxNome";
-            textBoxNome.Size = new Size(434, 23);
+            textBoxNome.Size = new Size(316, 23);
             textBoxNome.TabIndex = 4;
             // 
             // textBoxSobrenome
             // 
-            textBoxSobrenome.Location = new Point(70, 144);
+            textBoxSobrenome.Location = new Point(20, 102);
+            textBoxSobrenome.Margin = new Padding(2);
             textBoxSobrenome.Name = "textBoxSobrenome";
-            textBoxSobrenome.Size = new Size(434, 23);
+            textBoxSobrenome.Size = new Size(316, 23);
             textBoxSobrenome.TabIndex = 5;
             // 
-            // labelOperação
+            // labelOperacao
             // 
-            labelOperação.AutoSize = true;
-            labelOperação.Location = new Point(560, 71);
-            labelOperação.Name = "labelOperação";
-            labelOperação.Size = new Size(58, 15);
-            labelOperação.TabIndex = 6;
-            labelOperação.Text = "Operação";
-            labelOperação.Click += label4_Click;
+            labelOperacao.AutoSize = true;
+            labelOperacao.Location = new Point(363, 32);
+            labelOperacao.Margin = new Padding(2, 0, 2, 0);
+            labelOperacao.Name = "labelOperacao";
+            labelOperacao.Size = new Size(58, 15);
+            labelOperacao.TabIndex = 6;
+            labelOperacao.Text = "Operação";
+            // 
+            // comboBoxOperacao
+            // 
+            comboBoxOperacao.FormattingEnabled = true;
+            comboBoxOperacao.Items.AddRange(new object[] { "Dividir", "Multiplicar", "Somar", "Subtrair" });
+            comboBoxOperacao.Location = new Point(363, 49);
+            comboBoxOperacao.Margin = new Padding(2);
+            comboBoxOperacao.Name = "comboBoxOperacao";
+            comboBoxOperacao.Size = new Size(257, 23);
+            comboBoxOperacao.TabIndex = 7;
             // 
             // labelNumero1
             // 
             labelNumero1.AutoSize = true;
-            labelNumero1.Location = new Point(560, 126);
+            labelNumero1.Location = new Point(364, 82);
+            labelNumero1.Margin = new Padding(2, 0, 2, 0);
             labelNumero1.Name = "labelNumero1";
             labelNumero1.Size = new Size(66, 15);
-            labelNumero1.TabIndex = 7;
+            labelNumero1.TabIndex = 8;
             labelNumero1.Text = "Número 01";
             // 
-            // textBoxNumeroNum01
+            // textBoxNumero1
             // 
-            textBoxNumeroNum01.Location = new Point(560, 144);
-            textBoxNumeroNum01.Name = "textBoxNumeroNum01";
-            textBoxNumeroNum01.Size = new Size(139, 23);
-            textBoxNumeroNum01.TabIndex = 9;
+            textBoxNumero1.Location = new Point(364, 102);
+            textBoxNumero1.Margin = new Padding(2);
+            textBoxNumero1.Name = "textBoxNumero1";
+            textBoxNumero1.Size = new Size(114, 23);
+            textBoxNumero1.TabIndex = 9;
             // 
             // labelNumero2
             // 
             labelNumero2.AutoSize = true;
-            labelNumero2.Location = new Point(717, 126);
+            labelNumero2.Location = new Point(494, 82);
+            labelNumero2.Margin = new Padding(2, 0, 2, 0);
             labelNumero2.Name = "labelNumero2";
             labelNumero2.Size = new Size(66, 15);
             labelNumero2.TabIndex = 10;
             labelNumero2.Text = "Número 02";
             // 
-            // label7
+            // textBoxNumero2
             // 
-            label7.AutoSize = true;
-            label7.Location = new Point(560, 190);
-            label7.Name = "label7";
-            label7.Size = new Size(55, 15);
-            label7.TabIndex = 11;
-            label7.Text = "Historico";
-            label7.Click += label7_Click;
+            textBoxNumero2.Location = new Point(494, 102);
+            textBoxNumero2.Margin = new Padding(2);
+            textBoxNumero2.Name = "textBoxNumero2";
+            textBoxNumero2.Size = new Size(126, 23);
+            textBoxNumero2.TabIndex = 11;
+            // 
+            // labelHistorico
+            // 
+            labelHistorico.AutoSize = true;
+            labelHistorico.Location = new Point(364, 131);
+            labelHistorico.Margin = new Padding(2, 0, 2, 0);
+            labelHistorico.Name = "labelHistorico";
+            labelHistorico.Size = new Size(55, 15);
+            labelHistorico.TabIndex = 12;
+            labelHistorico.Text = "Histórico";
             // 
             // richTextBoxHistorico
             // 
-            richTextBoxHistorico.Location = new Point(560, 208);
+            richTextBoxHistorico.Location = new Point(364, 148);
+            richTextBoxHistorico.Margin = new Padding(2);
             richTextBoxHistorico.Name = "richTextBoxHistorico";
-            richTextBoxHistorico.Size = new Size(262, 111);
-            richTextBoxHistorico.TabIndex = 12;
+            richTextBoxHistorico.Size = new Size(256, 111);
+            richTextBoxHistorico.TabIndex = 13;
             richTextBoxHistorico.Text = "";
-            richTextBoxHistorico.TextChanged += richTextBoxHistorico_TextChanged;
             // 
             // buttonCalcular
             // 
-            buttonCalcular.Location = new Point(828, 71);
+            buttonCalcular.Location = new Point(624, 11);
+            buttonCalcular.Margin = new Padding(2);
             buttonCalcular.Name = "buttonCalcular";
-            buttonCalcular.Size = new Size(75, 187);
-            buttonCalcular.TabIndex = 13;
+            buttonCalcular.Size = new Size(78, 202);
+            buttonCalcular.TabIndex = 14;
             buttonCalcular.Text = "Calcular";
             buttonCalcular.UseVisualStyleBackColor = true;
             buttonCalcular.Click += buttonCalcular_Click;
             // 
-            // textBoxNum02
-            // 
-            textBoxNum02.Location = new Point(722, 144);
-            textBoxNum02.Name = "textBoxNum02";
-            textBoxNum02.Size = new Size(100, 23);
-            textBoxNum02.TabIndex = 14;
-            // 
-            // comboBoxOperação
-            // 
-            comboBoxOperação.FormattingEnabled = true;
-            comboBoxOperação.Items.AddRange(new object[] { "Dividir", "Multiplicar", "Somar", "Subtrair" });
-            comboBoxOperação.Location = new Point(560, 89);
-            comboBoxOperação.Name = "comboBoxOperação";
-            comboBoxOperação.Size = new Size(262, 23);
-            comboBoxOperação.TabIndex = 15;
-            // 
             // buttonLimpar
             // 
-            buttonLimpar.Location = new Point(828, 285);
+            buttonLimpar.Location = new Point(623, 217);
+            buttonLimpar.Margin = new Padding(2);
             buttonLimpar.Name = "buttonLimpar";
-            buttonLimpar.Size = new Size(75, 23);
-            buttonLimpar.TabIndex = 16;
+            buttonLimpar.Size = new Size(78, 40);
+            buttonLimpar.TabIndex = 15;
             buttonLimpar.Text = "Limpar";
             buttonLimpar.UseVisualStyleBackColor = true;
             buttonLimpar.Click += buttonLimpar_Click;
@@ -195,23 +206,24 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1052, 450);
+            ClientSize = new Size(1205, 270);
             Controls.Add(buttonLimpar);
-            Controls.Add(comboBoxOperação);
-            Controls.Add(textBoxNum02);
             Controls.Add(buttonCalcular);
             Controls.Add(richTextBoxHistorico);
-            Controls.Add(label7);
+            Controls.Add(labelHistorico);
+            Controls.Add(textBoxNumero2);
             Controls.Add(labelNumero2);
-            Controls.Add(textBoxNumeroNum01);
+            Controls.Add(textBoxNumero1);
             Controls.Add(labelNumero1);
-            Controls.Add(labelOperação);
+            Controls.Add(comboBoxOperacao);
+            Controls.Add(labelOperacao);
             Controls.Add(textBoxSobrenome);
             Controls.Add(textBoxNome);
             Controls.Add(labelSobrenome);
             Controls.Add(labelNome);
             Controls.Add(buttonConcatenar);
             Controls.Add(labelPrimeiraTela);
+            Margin = new Padding(2);
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);
@@ -226,15 +238,15 @@
         private Label labelSobrenome;
         private TextBox textBoxNome;
         private TextBox textBoxSobrenome;
-        private Label labelOperação;
+        private Label labelOperacao;
+        private ComboBox comboBoxOperacao;
         private Label labelNumero1;
-        private TextBox textBoxNumeroNum01;
+        private TextBox textBoxNumero1;
         private Label labelNumero2;
-        private Label label7;
+        private TextBox textBoxNumero2;
+        private Label labelHistorico;
         private RichTextBox richTextBoxHistorico;
         private Button buttonCalcular;
-        private TextBox textBoxNum02;
-        private ComboBox comboBoxOperação;
         private Button buttonLimpar;
     }
 }

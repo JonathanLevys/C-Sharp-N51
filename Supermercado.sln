@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.7.34003.232
+VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupermercadoForm", "SupermercadoForm\SupermercadoForm.csproj", "{139956FF-62BD-4FC6-9E59-006771FD2DB8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupermercadoForm", "SupermercadoForm\SupermercadoForm.csproj", "{8BF708BF-A79D-4573-99CF-03B0CD542220}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{139956FF-62BD-4FC6-9E59-006771FD2DB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{139956FF-62BD-4FC6-9E59-006771FD2DB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{139956FF-62BD-4FC6-9E59-006771FD2DB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{139956FF-62BD-4FC6-9E59-006771FD2DB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BF708BF-A79D-4573-99CF-03B0CD542220}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BF708BF-A79D-4573-99CF-03B0CD542220}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BF708BF-A79D-4573-99CF-03B0CD542220}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BF708BF-A79D-4573-99CF-03B0CD542220}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {F7073BE8-DDEB-445D-8020-F5F28C109193}
+		SolutionGuid = {EFBFC226-DE7D-4E34-9979-AA14B765BF66}
 	EndGlobalSection
 EndGlobal
