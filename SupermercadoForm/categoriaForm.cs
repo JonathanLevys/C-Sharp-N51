@@ -13,6 +13,7 @@ namespace SupermercadoForm
 {
     public partial class categoriaForm : Form
     {
+        public string ConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\74531\\Desktop\\Supermercado.mdf;Integrated Security=True;Connect Timeout=30";
         public categoriaForm()
         {
             InitializeComponent();
@@ -38,7 +39,7 @@ namespace SupermercadoForm
             }
             // Instancia um objeto para abrir a conexão com o banco de dados
             SqlConnection conexao = new SqlConnection();
-            conexao.ConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Suporte\\Desktop\\BancoDados.mdf;Integrated Security=True;Connect Timeout=30";
+            conexao.ConnectionString = ConnectionString;
 
             conexao.Open();
 
@@ -65,7 +66,7 @@ namespace SupermercadoForm
             // Instanciar um objeto para abrir a conexão com o BD
             SqlConnection conexao = new SqlConnection();
             // Definir uma ConnectionString (onde o bd se encontra)
-            conexao.ConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Suporte\\Desktop\\BancoDados.mdf;Integrated Security=True;Connect Timeout=30";
+            conexao.ConnectionString = ConnectionString;
             // Abrir a 
             conexao.Open();
 
@@ -99,7 +100,7 @@ namespace SupermercadoForm
 
             SqlConnection conexao = new SqlConnection();
             // Definir uma ConnectionString (onde o bd se encontra)
-            conexao.ConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Suporte\\Desktop\\BancoDados.mdf;Integrated Security=True;Connect Timeout=30";
+            conexao.ConnectionString = ConnectionString;
 
             conexao.Open();
 
@@ -164,7 +165,7 @@ namespace SupermercadoForm
 
             SqlConnection conexao = new SqlConnection();
             // Definir uma ConnectionString (onde o bd se encontra)
-            conexao.ConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Suporte\\Desktop\\BancoDados.mdf;Integrated Security=True;Connect Timeout=30";
+            conexao.ConnectionString = ConnectionString;
             // Abrir a conexão com o banco de dados
             conexao.Open();
             // Criar o objeto que será utilizado para defenir o comando que será executado
