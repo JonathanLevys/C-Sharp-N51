@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
-namespace SupermercadoForm
+namespace SupermercadoForm.Telas
 {
     public partial class categoriaForm : Form
     {
@@ -191,6 +191,11 @@ namespace SupermercadoForm
             MessageBox.Show("Categoria atualizada com sucesso.");
             // Atualizar lista de categorias
             ListarCategorias();
+        }
+
+        private void textBoxNome_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

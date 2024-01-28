@@ -1,4 +1,4 @@
-﻿namespace SupermercadoForm
+﻿namespace SupermercadoForm.Telas
 {
     partial class categoriaForm
     {
@@ -68,6 +68,7 @@
             textBoxNome.Name = "textBoxNome";
             textBoxNome.Size = new Size(320, 23);
             textBoxNome.TabIndex = 1;
+            textBoxNome.TextChanged += textBoxNome_TextChanged;
             textBoxNome.KeyDown += textBoxNome_KeyDown;
             // 
             // buttonListar

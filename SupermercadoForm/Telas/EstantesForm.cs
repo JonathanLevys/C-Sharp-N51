@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SupermercadoForm
+namespace SupermercadoForm.Telas
 {
     public partial class EstantesForm : Form
     {
