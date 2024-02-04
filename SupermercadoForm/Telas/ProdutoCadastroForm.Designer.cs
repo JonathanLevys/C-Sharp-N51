@@ -90,11 +90,14 @@
             // 
             // comboBoxCategoria
             // 
+            comboBoxCategoria.DisplayMember = "Nome";
             comboBoxCategoria.FormattingEnabled = true;
             comboBoxCategoria.Location = new Point(33, 89);
             comboBoxCategoria.Name = "comboBoxCategoria";
             comboBoxCategoria.Size = new Size(233, 23);
             comboBoxCategoria.TabIndex = 6;
+            comboBoxCategoria.ValueMember = "Nome";
+            comboBoxCategoria.SelectedIndexChanged += comboBoxCategoria_SelectedIndexChanged;
             // 
             // ProdutoCadastroForm
             // 
@@ -110,6 +113,7 @@
             Controls.Add(labelNome);
             Name = "ProdutoCadastroForm";
             Text = "ProdutoCadastroForm";
+            Load += ProdutoCadastroForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

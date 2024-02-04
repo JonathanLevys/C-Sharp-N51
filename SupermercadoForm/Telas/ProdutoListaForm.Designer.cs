@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             dataGridViewProdutos = new DataGridView();
+            ColumnID = new DataGridViewTextBoxColumn();
+            ColumnNome = new DataGridViewTextBoxColumn();
+            ColumnCategoria = new DataGridViewTextBoxColumn();
+            ColumnPreçoUnitário = new DataGridViewTextBoxColumn();
             buttonEditar = new Button();
             buttonApagar = new Button();
             labelQuantidadeTotal = new Label();
@@ -44,10 +48,6 @@
             buttonNovo = new Button();
             comboBoxOrdenar = new ComboBox();
             labelOrdenar = new Label();
-            ColumnID = new DataGridViewTextBoxColumn();
-            ColumnNome = new DataGridViewTextBoxColumn();
-            ColumnCategoria = new DataGridViewTextBoxColumn();
-            ColumnPreçoUnitário = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridViewProdutos).BeginInit();
             SuspendLayout();
             // 
@@ -61,9 +61,33 @@
             dataGridViewProdutos.Location = new Point(12, 85);
             dataGridViewProdutos.Name = "dataGridViewProdutos";
             dataGridViewProdutos.ReadOnly = true;
-            dataGridViewProdutos.RowTemplate.Height = 25;
             dataGridViewProdutos.Size = new Size(594, 373);
             dataGridViewProdutos.TabIndex = 0;
+            dataGridViewProdutos.CellContentClick += dataGridViewProdutos_CellContentClick;
+            // 
+            // ColumnID
+            // 
+            ColumnID.HeaderText = "Código";
+            ColumnID.Name = "ColumnID";
+            ColumnID.ReadOnly = true;
+            // 
+            // ColumnNome
+            // 
+            ColumnNome.HeaderText = "Nome";
+            ColumnNome.Name = "ColumnNome";
+            ColumnNome.ReadOnly = true;
+            // 
+            // ColumnCategoria
+            // 
+            ColumnCategoria.HeaderText = "Categoria";
+            ColumnCategoria.Name = "ColumnCategoria";
+            ColumnCategoria.ReadOnly = true;
+            // 
+            // ColumnPreçoUnitário
+            // 
+            ColumnPreçoUnitário.HeaderText = "Preço Unitário";
+            ColumnPreçoUnitário.Name = "ColumnPreçoUnitário";
+            ColumnPreçoUnitário.ReadOnly = true;
             // 
             // buttonEditar
             // 
@@ -198,30 +222,6 @@
             labelOrdenar.Size = new Size(50, 15);
             labelOrdenar.TabIndex = 15;
             labelOrdenar.Text = "Ordenar";
-            // 
-            // ColumnID
-            // 
-            ColumnID.HeaderText = "Código";
-            ColumnID.Name = "ColumnID";
-            ColumnID.ReadOnly = true;
-            // 
-            // ColumnNome
-            // 
-            ColumnNome.HeaderText = "Nome";
-            ColumnNome.Name = "ColumnNome";
-            ColumnNome.ReadOnly = true;
-            // 
-            // ColumnCategoria
-            // 
-            ColumnCategoria.HeaderText = "Categoria";
-            ColumnCategoria.Name = "ColumnCategoria";
-            ColumnCategoria.ReadOnly = true;
-            // 
-            // ColumnPreçoUnitário
-            // 
-            ColumnPreçoUnitário.HeaderText = "Preço Unitário";
-            ColumnPreçoUnitário.Name = "ColumnPreçoUnitário";
-            ColumnPreçoUnitário.ReadOnly = true;
             // 
             // ProdutoListaForm
             // 

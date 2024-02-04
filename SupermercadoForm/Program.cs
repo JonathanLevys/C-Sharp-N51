@@ -1,3 +1,4 @@
+using SupermercadoForm.Repositorios;
 using SupermercadoForm.Telas;
 
 namespace SupermercadoForm
@@ -13,7 +14,8 @@ namespace SupermercadoForm
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new MenuForm());
+            Application.Run(new EstoqueForm());
+
         }
     }
 }

@@ -43,3 +43,11 @@ INSERT INTO produtos (nome, preco_unitario, id_categoria) VALUES
 
 SELECT * FROM produtos;
 SELECT * FROM categorias;
+
+CREATE TABLE estoques(
+	id INT PRIMARY KEY IDENTITY(1, 1),
+	quantidade INT NOT NULL,
+	id_produto INT NOT NULL, -- coluna para referenciar a outra tabela
+
+	FOREIGN KEY (id_produto) REFERENCES produtos(id)
+);
