@@ -1,5 +1,6 @@
 ﻿using SupermercadoForm.BancoDados;
 using SupermercadoForm.Entidades;
+using SupermercadoForm.Modelos;
 using System.Data;
 
 namespace SupermercadoForm.Repositorios
@@ -31,33 +32,46 @@ namespace SupermercadoForm.Repositorios
             //Fechar a conexão com o BD.
             comando.Connection.Close();
         }
-        public List<Produto> ObterTodos()
+        public List<Produto> ObterTodos(ProdutoFiltros produtoFiltros)
         {
-            // Instanciando um objeto que realiza a conexão com o BD
+
+            // Instanciado um objeto que realiza a conexão com o banco de dados
             var conexao = new ConexaoBancoDados();
-            // Criado o comando utilizado a conexão
+            // Criado o comando utilizando a conexão
             var comando = conexao.Conectar();
-            // definir o comando que sera executado para buscar as categorias ordenadas
-            comando.CommandText = """
-                SELECT
-                    produtos.id,
-                    produtos.nome,
+            // Definir o comando de criar produto na tabela de produtos
+            comando.CommandText = $"""
+                SELECT 
+	                produtos.id, 
+	                produtos.nome,
                     produtos.id_categoria AS 'categoriaId',
                     produtos.preco_unitario,
-                    categorias.nome AS 'categoriaNome'
-               FROM produtos
-               
-               -- JOIN: consulta multi tabelas;
-               INNER JOIN categorias ON (produtos.id_categoria = categorias.id);
-""";
+	                categorias.nome AS 'categoriaNome'
 
-            // Instanciado uma tabela em memoria para armazenar os registros retornados do BD na consulta SELECT 
+            FROM produtos
+
+            -- JOIN: consulta multi tabelas;
+            INNER JOIN categorias ON (produtos.id_categoria = categorias.id)
+
+            WHERE produtos.nome LIKE @PESQUISA
+            ORDER BY {produtoFiltros.OrdenacaoCampo} {produtoFiltros.OrdenacaoOrdem}
+            OFFSET @POSICAO_PAGINACAO ROWS -- Determinar qual será a pagina
+            FETCH NEXT @QUANTIDADE ROWS ONLY -- Determinar a quantidade de registros consultados
+""";
+            
+            comando.Parameters.AddWithValue("@PESQUISA", produtoFiltros.Pesquisa);
+            comando.Parameters.AddWithValue("@QUANTIDADE", produtoFiltros.Quantidade);
+            comando.Parameters.AddWithValue("@POSICAO_PAGINACAO", produtoFiltros.Pagina);
+
+
+            // Instanciado uma tabela em memória para armazenar os registros retornados do BD na consulta SELECT
             var tabelaEmMemoria = new DataTable();
-            //Executar a consulta SELECT carregando os dados na tabela em memória
+            // Executar a consulta SELECT carregando os dados na tabela em memória
             tabelaEmMemoria.Load(comando.ExecuteReader());
-            //fechar conexao com o banco de dados
+            // Fechar conexão com o BD
             comando.Connection.Close();
-            // Instanciado uma lista para armazenar categorias
+
+            // Instanciado uma lista para armazenar as produtos
             var produtos = new List<Produto>();
             // Percorrer os registros armazenados na tabela em memória
             for (int i = 0; i < tabelaEmMemoria.Rows.Count; i++)
@@ -70,17 +84,33 @@ namespace SupermercadoForm.Repositorios
                 produto.Nome = registro["nome"].ToString();
                 produto.PrecoUnitario = Convert.ToDecimal(registro["preco_unitario"]);
 
-                // Instanciar um objero preenchendo os dados da categoria
+                // Instanciar um objeto preenchendo os dados da categoria
                 var categoria = new Categoria();
                 categoria.Id = Convert.ToInt32(registro["categoriaId"]);
                 categoria.Nome = registro["categoriaNome"].ToString();
 
-                // Definir a categoria para o objeto do produto, para qie seja possivel visualizar na tela a categoria do produto.
+                // Definir a categoria para o objeto do produto, para que seja possível visualizar na tela a categoria do produto
                 produto.Categoria = categoria;
 
                 produtos.Add(produto);
             }
+
             return produtos;
+        }
+
+        public int ObterQuantidadeTotalRegistros()
+        {
+            // Instanciado um objeto que realiza a conexão com o banco de dados
+            var conexao = new ConexaoBancoDados();
+            // Criado o comando utilizando a conexão
+            var comando = conexao.Conectar();
+            // Definir o comando de criar produto na tabela de produtos
+            comando.CommandText = "SELECT COUNT(id) FROM produtos";
+            //ExecuteScalar executará o comando no bd com o objetivo de obter um numero inteiro
+            var registroQuantidade = Convert.ToInt32(comando.ExecuteScalar());
+            //Fechar a conexão com banco
+            comando.Connection.Close();
+            return registroQuantidade;
         }
     }
 }

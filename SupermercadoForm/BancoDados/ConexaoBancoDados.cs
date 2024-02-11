@@ -9,7 +9,7 @@ namespace SupermercadoForm.BancoDados
 {
     internal class ConexaoBancoDados
     {
-        private string ConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\74531\\Desktop\\SupermercadoDados.mdf;Integrated Security=True;Connect Timeout=30";
+        private string ConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\74531\\Desktop\\BancoDados2.mdf;Integrated Security=True;Connect Timeout=30";
 
         public SqlCommand Conectar()
         {

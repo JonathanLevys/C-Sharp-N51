@@ -1,4 +1,5 @@
-﻿using SupermercadoForm.Repositorios;
+﻿using SupermercadoForm.Modelos;
+using SupermercadoForm.Repositorios;
 
 namespace SupermercadoForm.Telas
 {
@@ -14,7 +15,11 @@ namespace SupermercadoForm.Telas
         {
             var produtoRepositorio = new ProdutoRepositorio();
 
-            var produtos = produtoRepositorio.ObterTodos();
+            var produtoFiltros = new ProdutoFiltros();
+            produtoFiltros.Quantidade = 10000;
+            produtoFiltros.Pagina = 0;
+
+            var produtos = produtoRepositorio.ObterTodos(produtoFiltros);
 
             for (int i = 0; i < produtos.Count; i++)
             {
