@@ -5,7 +5,7 @@ namespace SupermercadoForm.Telas
 {
     public partial class CategoriaForm : Form
     {
-        private CategoriaRepositorio repositorio;
+        private ICategoriaRepositorio repositorio;
 
         public CategoriaForm()
         {

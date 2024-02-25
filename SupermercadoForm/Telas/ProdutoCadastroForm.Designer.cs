@@ -97,7 +97,6 @@
             comboBoxCategoria.Size = new Size(233, 23);
             comboBoxCategoria.TabIndex = 6;
             comboBoxCategoria.ValueMember = "Nome";
-            comboBoxCategoria.SelectedIndexChanged += comboBoxCategoria_SelectedIndexChanged;
             // 
             // ProdutoCadastroForm
             // 
@@ -113,7 +112,6 @@
             Controls.Add(labelNome);
             Name = "ProdutoCadastroForm";
             Text = "ProdutoCadastroForm";
-            Load += ProdutoCadastroForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

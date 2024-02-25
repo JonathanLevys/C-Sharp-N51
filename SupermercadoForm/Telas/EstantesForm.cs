@@ -160,8 +160,7 @@ namespace SupermercadoForm.Telas
             string nome = textBoxNome.Text;
             string sigla = maskedTextBoxSigla.Text;
 
-            var estante = new Estante();
-            estante.Id = IdParaEditar;
+            var estante = repositorio.ObterPorId(IdParaEditar);
             estante.Nome = nome;
             estante.Sigla = sigla;
 

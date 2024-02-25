@@ -209,6 +209,7 @@ namespace SupermercadoForm.Telas
 
             var produtoCadastradoForm = new ProdutoCadastroForm(produtoSelecionado);
             produtoCadastradoForm.ShowDialog();
+            PreencherDataGridViewComProdutos();
         }
     }
 }

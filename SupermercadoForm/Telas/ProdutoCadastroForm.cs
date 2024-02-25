@@ -21,7 +21,7 @@ namespace SupermercadoForm.Telas
             textBoxNome.Text = produto.Nome;
             textBoxPreçoUnitario.Text = produto.PrecoUnitario.ToString();
 
-            foreach(var item in comboBoxCategoria.Items)
+            foreach (var item in comboBoxCategoria.Items)
             {
                 var categoria = (Categoria)item;
                 var categoriaId = categoria.Id;
@@ -33,7 +33,7 @@ namespace SupermercadoForm.Telas
 
             }
         }
-    
+
 
         private void PreencherDadosCategorias()
         {
@@ -59,41 +59,34 @@ namespace SupermercadoForm.Telas
 
             var nome = textBoxNome.Text;
             var precoUnitario = Convert.ToDecimal(textBoxPreçoUnitario.Text);
-            var idCategoria = categoria.Id;
 
             var repositorio = new ProdutoRepositorio();
 
-            var produto = new Produto()
-            {
-                Nome = nome,
-                PrecoUnitario = precoUnitario,
-                Categoria = new Categoria()
-                {
-                    Id = idCategoria
-                }
-            };
+            Produto produto;
 
             if (IdProdutoEditar == -1)
             {
+                produto = new Produto()
+                {
+                    Nome = nome,
+                    PrecoUnitario = precoUnitario,
+                    Categoria = categoria
+
+                };
+
                 repositorio.Cadastrar(produto);
                 MessageBox.Show("Produto cadastrado com sucesso");
+                return;
             }
-            else
-            {
-                produto.Id = IdProdutoEditar;
-                repositorio.Atualizar(produto);
-                MessageBox.Show("Produto atualizado com sucesso");
-            }
-        }
+            produto = repositorio.ObterPorId(IdProdutoEditar);
+            produto.Nome = nome;
+            produto.PrecoUnitario = precoUnitario;
+            produto.Categoria = categoria;
 
-        private void comboBoxCategoria_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ProdutoCadastroForm_Load(object sender, EventArgs e)
-        {
-
+            repositorio.Atualizar(produto);
+            MessageBox.Show("Produto atualizado com sucesso");
         }
     }
+
 }
+
