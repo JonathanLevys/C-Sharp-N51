@@ -4,7 +4,7 @@ namespace SupermercadoRepositorio.BancoDados
 {
     public class ConexaoBancoDados
     {
-        private string ConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\74531\\Documents\\SupermercadoBancoDados.mdf;Integrated Security=True;Connect Timeout=30";
+        private string ConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\74531\\Documents\\SupermercadoBancoDado.mdf;Integrated Security=True;Connect Timeout=30";
 
         public SqlCommand Conectar()
         {

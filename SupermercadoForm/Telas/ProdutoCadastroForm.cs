@@ -1,16 +1,39 @@
 ﻿using SupermercadoForm.Repositorios;
 using SupermercadoRepositorio.Entidades;
 using SupermercadoRepositorio.Repositorios;
+using System.Diagnostics.Eventing.Reader;
 
 namespace SupermercadoForm.Telas
 {
     public partial class ProdutoCadastroForm : Form
     {
+        private int IdProdutoEditar = -1;
         public ProdutoCadastroForm()
         {
             InitializeComponent();
             PreencherDadosCategorias();
         }
+
+        public ProdutoCadastroForm(Produto produto)
+        {
+            InitializeComponent();
+            PreencherDadosCategorias();
+            textBoxNome.Text = produto.Nome;
+            textBoxPreçoUnitario.Text = produto.PrecoUnitario.ToString();
+
+            foreach(var item in comboBoxCategoria.Items)
+            {
+                var categoria = (Categoria)item;
+                var categoriaId = categoria.Id;
+                if (categoriaId == produto.Categoria.Id)
+                {
+                    comboBoxCategoria.SelectedItem = categoria;
+                    break;
+                }
+
+            }
+        }
+    
 
         private void PreencherDadosCategorias()
         {
@@ -39,8 +62,28 @@ namespace SupermercadoForm.Telas
             var idCategoria = categoria.Id;
 
             var repositorio = new ProdutoRepositorio();
-            repositorio.Cadastrar(nome, idCategoria, precoUnitario);
-            MessageBox.Show("Produto cadastrado com sucesso");
+
+            var produto = new Produto()
+            {
+                Nome = nome,
+                PrecoUnitario = precoUnitario,
+                Categoria = new Categoria()
+                {
+                    Id = idCategoria
+                }
+            };
+
+            if (IdProdutoEditar == -1)
+            {
+                repositorio.Cadastrar(produto);
+                MessageBox.Show("Produto cadastrado com sucesso");
+            }
+            else
+            {
+                produto.Id = IdProdutoEditar;
+                repositorio.Atualizar(produto);
+                MessageBox.Show("Produto atualizado com sucesso");
+            }
         }
 
         private void comboBoxCategoria_SelectedIndexChanged(object sender, EventArgs e)

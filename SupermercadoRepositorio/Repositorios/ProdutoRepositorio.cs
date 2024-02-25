@@ -132,12 +132,52 @@ namespace SupermercadoForm.Repositorios
 
         public Produto ObterPorId(int id)
         {
-            throw new NotImplementedException();
-        }
+            //Instanciando um objeto que realiza a conexao com o BD
+            var conexao = new ConexaoBancoDados();
+            // Criado o comando utilizando a conexão
+            var comando = conexao.Conectar();
+            // Definir o comando de criar produto na tabela de produtos
+            comando.CommandText = "SELECT * FROM produtos WHERE id = @ID";
+            // Definir o valor do id para o select
+            comando.Parameters.AddWithValue("@ID", id);
+            // Instanciado uma tabela em memória para armazenar os registros retornados do BD na consulta SELECT
+            var tabelaEmMemoria = new DataTable();
+            // Executar a consulta SELECT carregando os dados na tabela em memória
+            tabelaEmMemoria.Load(comando.ExecuteReader());
+            // Fechar conexão com o BD
+            comando.Connection.Close();
+            var registro = tabelaEmMemoria.Rows[0];
+            var produto = new Produto();
+            produto.Id = Convert.ToInt32(registro["id"]);
+            produto.Nome = registro["nome"].ToString();
+            produto.PrecoUnitario = Convert.ToDecimal(registro["preco_unitario"]);
+            produto.Categoria = new Categoria();
+            produto.Categoria.Id = Convert.ToInt32(registro["Id_categoria"]);
+            return produto;         
 
+        }
         public void Atualizar(Produto produto)
         {
-            throw new NotImplementedException();
+            //Instanciando um objeto que realiza
+            var conexao = new ConexaoBancoDados();
+
+            var comando = conexao.Conectar();
+
+            comando.CommandText = """
+                UPDATE produtos SET
+                nome =@NOME,
+                id_categoria = @ID_CATEGORIA
+                preco_unitario = @PRECO_UNITARIO
+                WHERE id = @ID
+                """;
+
+            comando.Parameters.AddWithValue("@NOME", produto.Nome);
+            comando.Parameters.AddWithValue("@ID_CATEGORIA", produto.Categoria.Id);
+            comando.Parameters.AddWithValue("@PRECO_UNITARIO", produto.PrecoUnitario);
+            comando.Parameters.AddWithValue("@ID", produto.Id);
+            comando.ExecuteNonQuery();
+            //Fechar a conexão com o BD.
+            comando.Connection.Close();
         }
     }
 }

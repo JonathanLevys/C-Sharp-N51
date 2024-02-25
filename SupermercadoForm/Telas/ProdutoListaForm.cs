@@ -6,14 +6,14 @@ namespace SupermercadoForm.Telas
 {
     public partial class ProdutoListaForm : Form
     {
-        private IProdutoRepositorio produtoRepossitorio;
+        private IProdutoRepositorio produtoRepositorio;
         private int PosicaoPaginacao = 0;
         private int QuantidadeRegistros = 0;
 
         public ProdutoListaForm()
         {
             InitializeComponent();
-            produtoRepossitorio = new ProdutoRepositorio();
+            produtoRepositorio = new ProdutoRepositorio();
             comboBoxExibir.SelectedIndex = 0;
             comboBoxOrdenar.SelectedIndex = 0;
             comboBoxQuantidade.SelectedIndex = 0;
@@ -41,8 +41,6 @@ namespace SupermercadoForm.Telas
             produtoFiltros.Pagina = PosicaoPaginacao;
 
 
-            //Instanciado um objeto do PreencherDadosCategorias, para obtermos a lista de produtos, 
-            var produtoRepositorio = new ProdutoRepositorio();
             // Obter a lista de categorias (SELECT no BD)
             var produtos = produtoRepositorio.ObterTodos(produtoFiltros);
             //percorrer cada uma das categorias obtidas na consulta (SELECT), adicionando no combobox da categoria
@@ -188,16 +186,29 @@ namespace SupermercadoForm.Telas
         private void buttonApagar_Click(object sender, EventArgs e)
         {
             var linhaSelecionada = dataGridViewProdutos.SelectedRows[0];
-            var id = Convert.ToInt32(linhaSelecionada.Cells[0]);
-            var nome = linhaSelecionada.Cells[1].ToString();
+            var id = Convert.ToInt32(linhaSelecionada.Cells[0].Value);
+            var nome = linhaSelecionada.Cells[1].Value.ToString();
 
             var resposta = MessageBox.Show(
-                "AVISO", $"Deseja realmente apagar o {nome}?",
+                $"Deseja realmente apagar o {nome}?",
+                "AVISO",
                 MessageBoxButtons.YesNo);
             if (resposta == DialogResult.No)
                 return;
 
             produtoRepositorio.Apagar(id);
+            PreencherDataGridViewComProdutos();
+        }
+
+        private void buttonEditar_Click(object sender, EventArgs e)
+        {
+            var linhaSelecionada = dataGridViewProdutos.SelectedRows[0];
+            var id = Convert.ToInt32(linhaSelecionada.Cells[0].Value);
+
+            var produtoSelecionado = produtoRepositorio.ObterPorId(id);
+
+            var produtoCadastradoForm = new ProdutoCadastroForm(produtoSelecionado);
+            produtoCadastradoForm.ShowDialog();
         }
     }
 }
