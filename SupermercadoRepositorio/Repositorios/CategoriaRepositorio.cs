@@ -1,10 +1,10 @@
-﻿using SupermercadoForm.BancoDados;
-using SupermercadoForm.Entidades;
+﻿using SupermercadoRepositorio.BancoDados;
 using System.Data;
+using SupermercadoRepositorio.Entidades;
 
-namespace SupermercadoForm.Repositorios
+namespace SupermercadoRepositorio.Repositorios
 {
-    internal class CategoriaRepositorio
+    public class CategoriaRepositorio
     {
         public List<Categoria> ObterTodos()
         {

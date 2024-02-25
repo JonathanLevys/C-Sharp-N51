@@ -1,16 +1,19 @@
 ﻿using SupermercadoForm.Modelos;
 using SupermercadoForm.Repositorios;
+using SupermercadoRepositorio.Repositorios;
 
 namespace SupermercadoForm.Telas
 {
     public partial class ProdutoListaForm : Form
     {
+        private IProdutoRepositorio produtoRepossitorio;
         private int PosicaoPaginacao = 0;
         private int QuantidadeRegistros = 0;
 
         public ProdutoListaForm()
         {
             InitializeComponent();
+            produtoRepossitorio = new ProdutoRepositorio();
             comboBoxExibir.SelectedIndex = 0;
             comboBoxOrdenar.SelectedIndex = 0;
             comboBoxQuantidade.SelectedIndex = 0;
@@ -180,6 +183,21 @@ namespace SupermercadoForm.Telas
             comboBoxQuantidade.SelectedIndex = 0;
             textBoxPesquisa.Clear();
             PreencherDataGridViewComProdutos();
+        }
+
+        private void buttonApagar_Click(object sender, EventArgs e)
+        {
+            var linhaSelecionada = dataGridViewProdutos.SelectedRows[0];
+            var id = Convert.ToInt32(linhaSelecionada.Cells[0]);
+            var nome = linhaSelecionada.Cells[1].ToString();
+
+            var resposta = MessageBox.Show(
+                "AVISO", $"Deseja realmente apagar o {nome}?",
+                MessageBoxButtons.YesNo);
+            if (resposta == DialogResult.No)
+                return;
+
+            produtoRepositorio.Apagar(id);
         }
     }
 }

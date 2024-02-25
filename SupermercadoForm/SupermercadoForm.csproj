@@ -9,7 +9,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+	  <ProjectReference Include="..\SupermercadoRepositorio\SupermercadoRepositorio.csproj" />
 	</ItemGroup>
+
+	
 
 </Project>

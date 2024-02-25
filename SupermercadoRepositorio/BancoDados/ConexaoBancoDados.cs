@@ -1,8 +1,8 @@
 ﻿using System.Data.SqlClient;
 
-namespace SupermercadoForm.BancoDados
+namespace SupermercadoRepositorio.BancoDados
 {
-    internal class ConexaoBancoDados
+    public class ConexaoBancoDados
     {
         private string ConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\74531\\Documents\\SupermercadoBancoDados.mdf;Integrated Security=True;Connect Timeout=30";
 

@@ -1,6 +1,7 @@
-﻿using SupermercadoForm.BancoDados;
-using SupermercadoForm.Entidades;
-using SupermercadoForm.Modelos;
+﻿using SupermercadoForm.Modelos;
+using SupermercadoRepositorio.BancoDados;
+using SupermercadoRepositorio.Entidades;
+using SupermercadoRepositorio.Repositorios;
 using System.Data;
 
 namespace SupermercadoForm.Repositorios
@@ -13,10 +14,10 @@ namespace SupermercadoForm.Repositorios
     // Read => SELECT
     // Update => UPDATE
     // Delete => DELETE
-    internal class ProdutoRepositorio
+    public class ProdutoRepositorio : IProdutoRepositorio
 
     {
-        public void Cadastrar(string nome, int idCategoria, decimal precoUnitario)
+        public void Cadastrar(Produto produto)
         {
             //Instanciando um objeto que realiza
             var conexao = new ConexaoBancoDados();
@@ -25,9 +26,9 @@ namespace SupermercadoForm.Repositorios
 
             comando.CommandText = "INSERT INTO produtos ( nome, id_categoria, preco_unitario) VALUES (@NOME, @ID_CATEGORIA, @PRECO_UNITARIO)";
 
-            comando.Parameters.AddWithValue("@NOME", nome);
-            comando.Parameters.AddWithValue("@ID_CATEGORIA", idCategoria);
-            comando.Parameters.AddWithValue("@PRECO_UNITARIO", precoUnitario);
+            comando.Parameters.AddWithValue("@NOME", produto.Nome);
+            comando.Parameters.AddWithValue("@ID_CATEGORIA", produto.Categoria.Id);
+            comando.Parameters.AddWithValue("@PRECO_UNITARIO", produto.PrecoUnitario);
             comando.ExecuteNonQuery();
             //Fechar a conexão com o BD.
             comando.Connection.Close();
@@ -111,6 +112,32 @@ namespace SupermercadoForm.Repositorios
             //Fechar a conexão com banco
             comando.Connection.Close();
             return registroQuantidade;
+        }
+
+        public void Apagar(int id)
+        {
+            //Instanciando um objeto que realiza a conexao com o BD
+            var conexao = new ConexaoBancoDados();
+
+            var comando = conexao.Conectar();
+
+            comando.CommandText = "DELETE FROM produtos WHERE id =@ID";
+
+            comando.Parameters.AddWithValue("@ID", id);
+            comando.ExecuteNonQuery();
+            //Fechar a conexão com o BD.
+            comando.Connection.Close();
+
+        }
+
+        public Produto ObterPorId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Atualizar(Produto produto)
+        {
+            throw new NotImplementedException();
         }
     }
 }

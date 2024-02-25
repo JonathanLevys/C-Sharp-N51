@@ -63,6 +63,7 @@
             dataGridViewProdutos.Location = new Point(12, 85);
             dataGridViewProdutos.Name = "dataGridViewProdutos";
             dataGridViewProdutos.ReadOnly = true;
+            dataGridViewProdutos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewProdutos.Size = new Size(594, 373);
             dataGridViewProdutos.TabIndex = 0;
             dataGridViewProdutos.CellContentClick += dataGridViewProdutos_CellContentClick;
@@ -110,6 +111,7 @@
             buttonApagar.TabIndex = 2;
             buttonApagar.Text = "Apagar";
             buttonApagar.UseVisualStyleBackColor = true;
+            buttonApagar.Click += buttonApagar_Click;
             // 
             // labelQuantidadeTotal
             // 

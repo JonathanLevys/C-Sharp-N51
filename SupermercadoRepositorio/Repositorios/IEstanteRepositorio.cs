@@ -1,8 +1,8 @@
-﻿using SupermercadoForm.Entidades;
+﻿using SupermercadoRepositorio.Entidades;
 
 namespace SupermercadoForm.Repositorios
 {
-    internal interface IEstanteRepositorio
+    public interface IEstanteRepositorio
     {
         void Cadastrar(Estante estante);
         List<Estante> ObterTodos(string pesquisa);

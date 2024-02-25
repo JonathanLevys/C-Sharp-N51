@@ -1,5 +1,5 @@
-﻿using SupermercadoForm.Entidades;
-using SupermercadoForm.Repositorios;
+﻿using SupermercadoRepositorio.Entidades;
+using SupermercadoRepositorio.Repositorios;
 
 namespace SupermercadoForm.Telas
 {
@@ -73,6 +73,7 @@ namespace SupermercadoForm.Telas
         {
             ApagarCategorias();
         }
+
         private void ApagarCategorias()
         {
             int codigoInformado = Convert.ToInt32(textBoxApagar.Text);

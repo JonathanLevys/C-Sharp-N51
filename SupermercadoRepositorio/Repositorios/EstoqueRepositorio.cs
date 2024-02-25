@@ -1,8 +1,8 @@
-﻿using SupermercadoForm.BancoDados;
+﻿using SupermercadoRepositorio.BancoDados;
 
 namespace SupermercadoForm.Repositorios
 {
-    internal class EstoqueRepositorio
+    public class EstoqueRepositorio
     {
         public void Cadastrar(int  id_produto, int quantidade) 
         {

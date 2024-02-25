@@ -1,17 +1,16 @@
-﻿using SupermercadoForm.Entidades;
-using SupermercadoForm.Repositorios;
-using System.Data.SqlClient;
+﻿using SupermercadoForm.Repositorios;
+using SupermercadoRepositorio.Entidades;
 
 namespace SupermercadoForm.Telas
 {
     public partial class EstantesForm : Form
     {
-        private IEstanteRepositorio Repositorio;
+        private IEstanteRepositorio repositorio;
         public int IdParaEditar = -1;
 
         public EstantesForm()
         {
-            Repositorio = new EstanteRepositorio();
+            repositorio = new EstanteRepositorio();
             InitializeComponent();
             ListarEstantes();
         }
@@ -37,16 +36,16 @@ namespace SupermercadoForm.Telas
         private void ListarEstantes()
         {
             // Obter o texto para pesquisa
-            string pesquisa =  textBoxPesquisar.Text.Trim();
+            string pesquisa = textBoxPesquisar.Text.Trim();
 
             // Limpar dataGripView, para nao ter duplicidadede registros
             dataGridViewEstantes.Rows.Clear();
 
-            var estantes = Repositorio.ObterTodos(pesquisa);
+            var estantes = repositorio.ObterTodos(pesquisa);
 
             // Pecorrer casa um dos registros
-            foreach(var estante in estantes)
-            
+            foreach (var estante in estantes)
+
                 dataGridViewEstantes.Rows.Add(new object[]
                 {
                     estante.Id, estante.Nome, estante.Sigla
@@ -64,7 +63,7 @@ namespace SupermercadoForm.Telas
             estante.Nome = nome;
             estante.Sigla = sigla;
 
-            Repositorio.Cadastrar(estante);
+            repositorio.Cadastrar(estante);
 
             ListarEstantes(); // Atualizar dataGripView(tabela) com os registros deas estantes do BD
             LimparCampos(); // Limpar os campos da tela
@@ -119,27 +118,10 @@ namespace SupermercadoForm.Telas
                 return;
             }
 
-            // Conectar com o banco de dados
-            SqlConnection conexao = new SqlConnection();
-            conexao.ConnectionString = ConnectionString;
-            conexao.Open();
+            repositorio.Apagar(id);
 
-            //definir o comando da consulta das estantes
-            SqlCommand comando = conexao.CreateCommand();
-            comando.CommandText = "DELETE FROM estantes WHERE id = @ID";
-            comando.Parameters.AddWithValue("@ID", id);
-
-            // Executar o insert armazenando a quantidade de registros afetados 
-            int quantidadeRegistrosAfetados = comando.ExecuteNonQuery();
-
-            //Verificar que o registro foi persistido com sucesso
-            if (quantidadeRegistrosAfetados > 0)
-            {
-                ListarEstantes(); // Atualizar dataGripView(tabela) com os registros deas estantes do BD
-                MessageBox.Show("Estante apagada com sucesso");
-            }
-            // Fechar a conexão com BD
-            conexao.Close();
+            ListarEstantes(); // Atualizar dataGripView(tabela) com os registros deas estantes do BD
+            MessageBox.Show("Estante apagada com sucesso");
         }
 
         private void buttonEditar_Click(object sender, EventArgs e)
@@ -166,7 +148,7 @@ namespace SupermercadoForm.Telas
             //Pegar o id da linha selecionada
             IdParaEditar = Convert.ToInt32(LinhaSelecionada.Cells[0].Value);  // Cells [0] pq a primeira coluna do DataGripView é o id
 
-            var estante = Repositorio.ObterPorId(IdParaEditar);
+            var estante = repositorio.ObterPorId(IdParaEditar);
 
             textBoxNome.Text = estante.Nome;
             maskedTextBoxSigla.Text = estante.Sigla;
@@ -183,7 +165,7 @@ namespace SupermercadoForm.Telas
             estante.Nome = nome;
             estante.Sigla = sigla;
 
-            Repositorio.Atualizar(estante);
+            repositorio.Atualizar(estante);
 
             ListarEstantes();
             LimparCampos();
