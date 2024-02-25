@@ -1,20 +1,11 @@
 ﻿using SupermercadoForm.Modelos;
 using SupermercadoForm.Repositorios;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SupermercadoForm.Telas
 {
     public partial class ProdutoListaForm : Form
     {
-        private int posicaoPaginacao = 0;
+        private int PosicaoPaginacao = 0;
         private int QuantidadeRegistros = 0;
 
         public ProdutoListaForm()
@@ -44,7 +35,7 @@ namespace SupermercadoForm.Telas
             produtoFiltros.Quantidade = ObterQuantidadeParaExibir();
             produtoFiltros.OrdenacaoCampo = comboBoxExibir.SelectedItem.ToString();
             produtoFiltros.OrdenacaoOrdem = comboBoxOrdenar.SelectedItem.ToString();
-            produtoFiltros.Pagina = posicaoPaginacao;
+            produtoFiltros.Pagina = PosicaoPaginacao;
 
 
             //Instanciado um objeto do PreencherDadosCategorias, para obtermos a lista de produtos, 
@@ -69,6 +60,7 @@ namespace SupermercadoForm.Telas
             DesabilitarBotaoPaginacaoNegativa();
             PreencherLabelQuantidadeTotalRegistros();
         }
+
         private void buttonNovo_Click(object sender, EventArgs e)
         {
             var formCadastro = new ProdutoCadastroForm();
@@ -107,7 +99,7 @@ namespace SupermercadoForm.Telas
                 comboBoxOrdenar.SelectedIndex != -1 &&
                 comboBoxQuantidade.SelectedIndex != -1)
             {
-                posicaoPaginacao = 0;
+                PosicaoPaginacao = 0;
                 PreencherDataGridViewComProdutos();
             }
         }
@@ -125,45 +117,47 @@ namespace SupermercadoForm.Telas
         private void ButtonPaginacaoProximo_Click(object sender, EventArgs e)
         {
             int quantidadeParaExibir = ObterQuantidadeParaExibir();
-            posicaoPaginacao += quantidadeParaExibir;
+            PosicaoPaginacao += quantidadeParaExibir;
             PreencherDataGridViewComProdutos();
         }
 
         private void ButtonPaginacaoAnterior_Click(object sender, EventArgs e)
         {
             int quantidadeParaExibir = ObterQuantidadeParaExibir();
-            posicaoPaginacao -= quantidadeParaExibir;
+            PosicaoPaginacao -= quantidadeParaExibir;
             PreencherDataGridViewComProdutos();
         }
 
         private void DesabilitarBotaoPaginacaoNegativa()
         {
             int quantidadeParaExibir = ObterQuantidadeParaExibir();
-            if (posicaoPaginacao - quantidadeParaExibir < 0)
+            if (PosicaoPaginacao - quantidadeParaExibir < 0)
             {
                 ButtonPaginacaoAnterior.Enabled = false;
             }
-            if (posicaoPaginacao - quantidadeParaExibir >= 0)
+            if (PosicaoPaginacao - quantidadeParaExibir >= 0)
             {
                 ButtonPaginacaoAnterior.Enabled = true;
             }
-            if (posicaoPaginacao + quantidadeParaExibir >= QuantidadeRegistros)
+            if (PosicaoPaginacao + quantidadeParaExibir >= QuantidadeRegistros)
             {
                 ButtonPaginacaoProximo.Enabled = false;
             }
-            if (posicaoPaginacao + quantidadeParaExibir < QuantidadeRegistros)
+            if (PosicaoPaginacao + quantidadeParaExibir < QuantidadeRegistros)
             {
                 ButtonPaginacaoProximo.Enabled = true;
             }
 
 
         }
+
         private void PreencherLabelQuantidadeTotalRegistros()
         {
             var produtoRepositorio = new ProdutoRepositorio();
             QuantidadeRegistros = produtoRepositorio.ObterQuantidadeTotalRegistros();
             labellabelQuantidadeTotalValor.Text = QuantidadeRegistros.ToString();
         }
+
         private int ObterQuantidadeParaExibir()
         {
             var quantidadeSelecionada = comboBoxQuantidade.SelectedItem.ToString();

@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
+﻿using SupermercadoForm.Entidades;
+using SupermercadoForm.Repositorios;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SupermercadoForm.Telas
 {
     public partial class EstantesForm : Form
     {
-        public string ConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\74531\\Desktop\\Supermercado.mdf;Integrated Security=True;Connect Timeout=30";
+        private IEstanteRepositorio Repositorio;
         public int IdParaEditar = -1;
+
         public EstantesForm()
         {
+            Repositorio = new EstanteRepositorio();
             InitializeComponent();
             ListarEstantes();
         }
@@ -43,73 +37,42 @@ namespace SupermercadoForm.Telas
         private void ListarEstantes()
         {
             // Obter o texto para pesquisa
-            string pesquisa = "%" + textBoxPesquisar.Text.Trim() + "%";
-
-            // Conectar com o banco de dados
-            SqlConnection conexao = new SqlConnection();
-            conexao.ConnectionString = ConnectionString;
-            conexao.Open();
-
-            //definir o comando da consulta das estantes
-            SqlCommand comando = conexao.CreateCommand();
-            comando.CommandText = "SELECT id, nome, sigla FROM estantes WHERE nome LIKE @PESQUISA";
-            comando.Parameters.AddWithValue("@PESQUISA", pesquisa);
-
-            //CRiar tabela em memoria e carregar registros da consulta(SELECT) das estantes
-            DataTable tabelaEmMemoria = new DataTable();
-            tabelaEmMemoria.Load(comando.ExecuteReader());
+            string pesquisa =  textBoxPesquisar.Text.Trim();
 
             // Limpar dataGripView, para nao ter duplicidadede registros
             dataGridViewEstantes.Rows.Clear();
 
-            conexao.Close();
+            var estantes = Repositorio.ObterTodos(pesquisa);
 
             // Pecorrer casa um dos registros
-            for (int i = 0; i < tabelaEmMemoria.Rows.Count; i++)
-            {
-                // Obter o registro (estantes) percorrido
-                DataRow registro = tabelaEmMemoria.Rows[i];
-                // Obter o id, nome e sigla da consulta realizada
-                int id = Convert.ToInt32(registro["id"]);
-                string nome = registro["nome"].ToString();
-                string sigla = registro["sigla"].ToString();
-
-                //Adicionar uma linha no DataGripView (componente da tabela do form)
+            foreach(var estante in estantes)
+            
                 dataGridViewEstantes.Rows.Add(new object[]
                 {
-                    id, nome, sigla
+                    estante.Id, estante.Nome, estante.Sigla
                 });
-            }
+
         }
+
         private void CadastrarEstantes()
         {
 
             string nome = textBoxNome.Text;
             string sigla = maskedTextBoxSigla.Text;
-            // Conectar com o banco de dados
-            SqlConnection conexao = new SqlConnection();
-            conexao.ConnectionString = ConnectionString;
-            conexao.Open();
 
-            //definir o comando da consulta das estantes
-            SqlCommand comando = conexao.CreateCommand();
-            comando.CommandText = "INSERT INTO estantes (nome, sigla) VALUES (@NOME, @SIGLA)";
-            comando.Parameters.AddWithValue("@NOME", nome);
-            comando.Parameters.AddWithValue("@SIGLA", sigla);
+            var estante = new Estante();
+            estante.Nome = nome;
+            estante.Sigla = sigla;
 
-            // Executar o insert armazenando a quantidade de registros afetados 
-            int quantidadeRegistrosAfetados = comando.ExecuteNonQuery();
+            Repositorio.Cadastrar(estante);
 
-            //Verificar que o registro foi persistido com sucesso
-            if (quantidadeRegistrosAfetados > 0)
-            {
-                ListarEstantes(); // Atualizar dataGripView(tabela) com os registros deas estantes do BD
-                LimparCampos(); // Limpar os campos da tela
-                MessageBox.Show("Estante cadastrada com sucesso");
-            }
+            ListarEstantes(); // Atualizar dataGripView(tabela) com os registros deas estantes do BD
+            LimparCampos(); // Limpar os campos da tela
+            MessageBox.Show("Estante cadastrada com sucesso");
 
 
         }
+
         private void LimparCampos()
         {
             textBoxNome.Clear();
@@ -203,60 +166,28 @@ namespace SupermercadoForm.Telas
             //Pegar o id da linha selecionada
             IdParaEditar = Convert.ToInt32(LinhaSelecionada.Cells[0].Value);  // Cells [0] pq a primeira coluna do DataGripView é o id
 
-            // Conectar com o banco de dados
-            SqlConnection conexao = new SqlConnection();
-            conexao.ConnectionString = ConnectionString;
-            conexao.Open();
+            var estante = Repositorio.ObterPorId(IdParaEditar);
 
-            //definir o comando da consulta das estantes
-            SqlCommand comando = conexao.CreateCommand();
-            comando.CommandText = "SELECT id, nome, sigla FROM estantes WHERE id = @ID";
-            comando.Parameters.AddWithValue("@ID", IdParaEditar);
+            textBoxNome.Text = estante.Nome;
+            maskedTextBoxSigla.Text = estante.Sigla;
 
-            //CRiar tabela em memoria e carregar registros da consulta(SELECT) das estantes
-            DataTable tabelaEmMemoria = new DataTable();
-            tabelaEmMemoria.Load(comando.ExecuteReader());
-
-            // Obter a primeira linha da tabela pois filtramos buscando po id, retornará um unico registro
-            DataRow registro = tabelaEmMemoria.Rows[0];
-
-            // Obter o id, nome e sigla da consulta realizada
-            string nome = registro["nome"].ToString();
-            string sigla = registro["sigla"].ToString();
-
-            textBoxNome.Text = nome;
-            maskedTextBoxSigla.Text = sigla;
-
-            // fechar conexão com o BD
-            conexao.Close();
         }
+
         private void AtualizarEstantes()
         {
             string nome = textBoxNome.Text;
             string sigla = maskedTextBoxSigla.Text;
 
-            // Conectar com o banco de dados
-            SqlConnection conexao = new SqlConnection();
-            conexao.ConnectionString = ConnectionString;
-            conexao.Open();
+            var estante = new Estante();
+            estante.Id = IdParaEditar;
+            estante.Nome = nome;
+            estante.Sigla = sigla;
 
-            //definir o comando da consulta das estantes
-            SqlCommand comando = conexao.CreateCommand();
-            comando.CommandText = "UPDATE estantes SET nome = @NOME, sigla = @SIGLA WHERE id = @ID";
-            comando.Parameters.AddWithValue("@NOME", nome);
-            comando.Parameters.AddWithValue("@SIGLA", sigla);
-            comando.Parameters.AddWithValue("@ID", IdParaEditar);
+            Repositorio.Atualizar(estante);
 
-            //Executar o update armazenando a quantidade de registros afetados
-            int quantidadeRegistroAfetados = comando.ExecuteNonQuery();
-
-            // Verificar que o registro foi persistido com sucesso
-            if (quantidadeRegistroAfetados > 0)
-            {
-                ListarEstantes();
-                LimparCampos();
-                MessageBox.Show("esntantes alterada com sucesso");
-            }
+            ListarEstantes();
+            LimparCampos();
+            MessageBox.Show("estantes alterada com sucesso");
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

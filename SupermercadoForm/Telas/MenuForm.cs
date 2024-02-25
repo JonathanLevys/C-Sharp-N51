@@ -1,15 +1,4 @@
-﻿using SupermercadoForm.Repositorios;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace SupermercadoForm.Telas
+﻿namespace SupermercadoForm.Telas
 {
     public partial class MenuForm : Form
     {
@@ -21,7 +10,7 @@ namespace SupermercadoForm.Telas
         private void buttonCategorias_Click(object sender, EventArgs e)
         {
             // Instanciar um objeto
-            categoriaForm form = new categoriaForm();
+            CategoriaForm form = new CategoriaForm();
             // Torna o dor visivel
             form.ShowDialog();
         }

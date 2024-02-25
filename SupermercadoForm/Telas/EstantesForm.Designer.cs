@@ -83,12 +83,12 @@
             // 
             dataGridViewEstantes.AllowUserToAddRows = false;
             dataGridViewEstantes.AllowUserToDeleteRows = false;
+            dataGridViewEstantes.BackgroundColor = SystemColors.GradientActiveCaption;
             dataGridViewEstantes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewEstantes.Columns.AddRange(new DataGridViewColumn[] { ColumnId, ColumnNome, ColumnSigla });
             dataGridViewEstantes.Location = new Point(285, 39);
             dataGridViewEstantes.Name = "dataGridViewEstantes";
             dataGridViewEstantes.ReadOnly = true;
-            dataGridViewEstantes.RowTemplate.Height = 25;
             dataGridViewEstantes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewEstantes.Size = new Size(390, 519);
             dataGridViewEstantes.TabIndex = 4;
@@ -174,6 +174,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(848, 705);
             Controls.Add(textBoxPesquisar);
             Controls.Add(labelPesquisar);

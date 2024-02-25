@@ -1,6 +1,6 @@
 ﻿namespace SupermercadoForm.Telas
 {
-    partial class categoriaForm
+    partial class CategoriaForm
     {
         /// <summary>
         /// Required designer variable.
